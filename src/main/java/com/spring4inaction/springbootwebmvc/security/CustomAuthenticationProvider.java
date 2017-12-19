@@ -27,13 +27,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             if (authentication.getName().equals("admin") && authentication.getCredentials().equals("test1234")){
                 System.out.println("Admin user is good.");
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 returnMe = new UsernamePasswordAuthenticationToken(authentication.getName(), authentication.getCredentials(), grantedAuthorities);
             } else if (authentication.getName().equals("user") && authentication.getCredentials().equals("test1234")){
                 System.out.println("User user is good.");
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
                 returnMe = new UsernamePasswordAuthenticationToken(authentication.getName(), authentication.getCredentials(), grantedAuthorities);
             }
         }
