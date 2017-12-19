@@ -14,6 +14,10 @@ import java.util.List;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+    //https://stackoverflow.com/questions/41946473/springboot-security-hasrole-not-working explains why the ROLE_ prefix here.
+    private static String ROLE_USER = "ROLE_USER";
+    private static String ROLE_ADMIN = "ROLE_ADMIN";
+
     public CustomAuthenticationProvider(){
         System.out.println("CustomAuthenticationProvider created");
     }
@@ -27,13 +31,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             if (authentication.getName().equals("admin") && authentication.getCredentials().equals("test1234")){
                 System.out.println("Admin user is good.");
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_USER));
+                grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_ADMIN));
                 returnMe = new UsernamePasswordAuthenticationToken(authentication.getName(), authentication.getCredentials(), grantedAuthorities);
             } else if (authentication.getName().equals("user") && authentication.getCredentials().equals("test1234")){
                 System.out.println("User user is good.");
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                grantedAuthorities.add(new SimpleGrantedAuthority(ROLE_USER));
                 returnMe = new UsernamePasswordAuthenticationToken(authentication.getName(), authentication.getCredentials(), grantedAuthorities);
             }
         }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>Home</title>
@@ -11,6 +11,8 @@
 <p>This is a test.</p>
 
 <a href="/">Home</a> | <a href="/admin">Admin</a> | <a href="/content">Content</a> | <a href="/logout">Log Out</a>
+
+<p>User is <span th:text="${username}">USERNAME</span> and admin is <span th:text="${isAdmin}">ADMIN</span>.</p>
 
 </body>
 </html>
